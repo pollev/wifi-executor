@@ -38,13 +38,20 @@ public class Extractor {
 		
 		
 		String wifiData = gatherWifiDetails();
-		System.out.println(wifiData);
+		try {
+			writeOutputToFile(wifiData);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 
 	public static String gatherWifiDetails(){
-		String wifiData = null;
+		logger.info("Gathering wifi details.");
 		
+		String wifiData = null;
+
 		CommandExecutor exec = CommandExecutor.getCommandExecutor();
 		Command detectWifiCommand = new DetectWifiPassCommand();
 		try {
@@ -60,8 +67,18 @@ public class Extractor {
 			Extractor.logger.error("Failed to extract wifi credentials. " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 		return wifiData;
+	}
+
+
+	public static void writeOutputToFile(String wifiData) throws IOException{
+		logger.info("Writing wifi details to file");
+		System.out.println(wifiData);
+		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream("wifiOut.txt"), "utf-8"))) {
+			writer.write(wifiData);
+		}
 	}
 
 }
