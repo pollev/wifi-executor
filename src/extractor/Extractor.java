@@ -6,6 +6,7 @@ import commands.DetectWifiPassCommand;
 import shellcommand.Command;
 import shellcommand.CommandExecutor;
 import shellcommand.NonMatchingOSException;
+import shellcommand.ProcessNotYetStartedException;
 
 public class Extractor {
 
@@ -16,8 +17,13 @@ public class Extractor {
 		
 		try {
 			exec.executeCommand(detectWifiCommand);
-			System.out.println(detectWifiCommand.getNormalOutput());
-		} catch (NonMatchingOSException | IOException e) {
+			detectWifiCommand.waitForCompletion();
+			if(detectWifiCommand.getExitCode() == 0){
+				System.out.println(detectWifiCommand.getNormalOutput());				
+			}else{
+				System.out.println(detectWifiCommand.getErrorOutput());
+			}
+		} catch (NonMatchingOSException | IOException | ProcessNotYetStartedException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

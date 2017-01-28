@@ -24,7 +24,7 @@ public class DetectWifiPassCommand extends Command{
 		this.osType = CommandExecutor.getCommandExecutor().getOSType();
 		
 		if(this.osType == OS.UNIX){
-			this.command = "echo not implemented";
+			this.command = "sudo cat /etc/NetworkManager/system-connections/*";
 		}else if(this.osType == OS.WINDOWS){
 			this.command = "echo not implemented";
 		}else{
