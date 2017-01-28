@@ -36,6 +36,14 @@
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4jVersion}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>Shell-Command-Executor-Lib</groupId>
+      <artifactId>Shell-Command-Executor-Lib</artifactId>
+      <version>0.5.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/../Shell-Command-Executor-Lib/target/Shell-Command-Executor-Lib-0.5.0-SNAPSHOT.jar</systemPath>
+    </dependency>
 
   </dependencies>
 </project>
