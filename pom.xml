@@ -21,7 +21,8 @@
   </build>
   
   <properties>
-    <slf4jVersion>1.6.1</slf4jVersion>
+    <slf4jVersion>1.7.6</slf4jVersion>
+    <Log4jVersion>1.7.5</Log4jVersion>
   </properties>
   
   <dependencies>
@@ -31,10 +32,18 @@
       <version>${slf4jVersion}</version>
     </dependency>
   
+<!-- We use log4j instead now
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4jVersion}</version>
+    </dependency>
+-->
+    
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${Log4jVersion}</version>
     </dependency>
     
     <dependency>

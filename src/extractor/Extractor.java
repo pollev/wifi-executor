@@ -1,7 +1,14 @@
 package extractor;
 
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.util.Properties;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,13 +21,27 @@ import shellcommand.ProcessNotYetStartedException;
 public class Extractor {
 
 	final static Logger logger = LoggerFactory.getLogger(CommandExecutor.class);
-	
+
 	public static void main(String[] args) {
+		// Setup logging
+		String log4JPropertyFile = "log4j.properties";
+		Properties p = new Properties();
+
+		try {
+		    p.load(new FileInputStream(log4JPropertyFile));
+		    PropertyConfigurator.configure(p);
+		    logger.info("Initialized logger!");
+		} catch (IOException e) {
+		    // Can't log exception with no logger
+			System.err.println(e.getMessage());
+		}
+		
+		
 		String wifiData = gatherWifiDetails();
 		System.out.println(wifiData);
 	}
-	
-	
+
+
 	public static String gatherWifiDetails(){
 		String wifiData = null;
 		
